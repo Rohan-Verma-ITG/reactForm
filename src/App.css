@@ -20,9 +20,10 @@ form h2 {
 
 /* Field wrapper */
 .flede {
-  margin-bottom: 20px;
-  display: flex;
-  flex-direction: column;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
 }
 
 /* Labels */
@@ -101,6 +102,11 @@ button:hover {
   background: #222;
 }
 
+.error {
+  color: red;
+  font-size: 14px;
+  margin-top: 4px;
+}
 /* Responsive */
 @media (max-width: 768px) {
   .select-grid {

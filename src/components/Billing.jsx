@@ -1,7 +1,7 @@
 import React from "react";
 import FormField from "./FormField";
 
-export default function Billing({ formData, handleChange ,countries, states, cities, errors}) {
+export default function Billing({ formData, handleChange, countries, states, cities, errors }) {
     return (
         <div className="billing-container">
             <h2>Billing Details</h2>
@@ -20,12 +20,16 @@ export default function Billing({ formData, handleChange ,countries, states, cit
                 name="lastName"
                 value={formData.lastName}
                 onChange={handleChange}
+                error={errors.lastName}
                 required
             />
 
             {/* Address Type */}
             <div className="flede">
-                <label>Address Type</label>
+                <label>Address Type
+
+                    <span className="required">*</span>
+                </label>
                 <div className="rad">
                     <div>
                         <input
@@ -61,6 +65,7 @@ export default function Billing({ formData, handleChange ,countries, states, cit
                     value={formData.companyName}
                     onChange={handleChange}
                     required
+                    error={errors.companyName}
                 />
             )}
 
@@ -70,6 +75,7 @@ export default function Billing({ formData, handleChange ,countries, states, cit
                 value={formData.house}
                 onChange={handleChange}
                 placeholder="House number and street name"
+                error={errors.house}
                 required
             />
 
@@ -78,6 +84,8 @@ export default function Billing({ formData, handleChange ,countries, states, cit
                 value={formData.appartment}
                 onChange={handleChange}
                 placeholder="Apartment, suite, unit, etc."
+                error={errors.appartment}
+
             />
 
             {/* <div className="select-grid"> */}
@@ -92,7 +100,7 @@ export default function Billing({ formData, handleChange ,countries, states, cit
                     onChange={handleChange}
                     required
                 >
-                    
+
                     <option value="">Select Country</option>
                     {countries.map((country) => (
                         <option key={country.iso2} value={country.iso2}>
@@ -100,6 +108,7 @@ export default function Billing({ formData, handleChange ,countries, states, cit
                         </option>
                     ))}
                 </select>
+                {errors.country && <span className="error">{errors.country}</span>}
             </div>
 
             <div className="flede">
@@ -112,7 +121,7 @@ export default function Billing({ formData, handleChange ,countries, states, cit
                     onChange={handleChange}
                     required
                 >
-                    
+
                     <option value="">Select State</option>
                     {states.map((state) => (
                         <option key={state.iso2} value={state.iso2}>
@@ -120,6 +129,7 @@ export default function Billing({ formData, handleChange ,countries, states, cit
                         </option>
                     ))}
                 </select>
+                {errors.state && <span className="error">{errors.state}</span>}
             </div>
 
             <div className="flede">
@@ -132,7 +142,7 @@ export default function Billing({ formData, handleChange ,countries, states, cit
                     onChange={handleChange}
                     required
                 >
-                    
+
                     <option value="">Select City</option>
                     {cities.map((city) => (
                         <option key={city.iso2} value={city.iso2}>
@@ -140,11 +150,12 @@ export default function Billing({ formData, handleChange ,countries, states, cit
                         </option>
                     ))}
                 </select>
+                {errors.city && <span className="error">{errors.city}</span>}
             </div>
 
             <div className="flede">
                 <label htmlFor="postalCode">Zip Code
-                    <span className="required">*</span>
+                    <span className="// required">*</span>
                 </label>
                 <input
                     type="text"
@@ -153,6 +164,7 @@ export default function Billing({ formData, handleChange ,countries, states, cit
                     onChange={handleChange}
                     required
                 />
+                {errors.postalCode && <span className="error">{errors.postalCode}</span>}
             </div>
             {/* </div> */}
 
@@ -161,6 +173,7 @@ export default function Billing({ formData, handleChange ,countries, states, cit
                 name="phone"
                 value={formData.phone}
                 onChange={handleChange}
+                error={errors.phone}
                 required
             />
         </div>

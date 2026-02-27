@@ -1,28 +1,26 @@
 const API_KEY =
-  "0b7cc812a34fc028c97d1022d39e6911f9fa7960fdcafeed1e99b9bb21716587";
+  "e3e13f45fe6ba5ee09d63ecdb140c3c9ba764fbd42a27a3d25158e3f70bfd3cd";
 const headers = {
   "X-CSCAPI-KEY": API_KEY,
   "Content-Type": "application/json",
 };
+
 const BASE_URL = "https://api.countrystatecity.in/v1";
 
 export const getAllCountries = async (setCountries) => {
   try {
-    const res = await fetch(`${BASE_URL}/countries`,
-      headers,
-    );
+    const res = await fetch(`${BASE_URL}/countries`, { headers });
 
     if (!res.ok) throw new Error("Failed to fetch countries");
 
     const data = await res.json();
     console.log(data);
 
-    setCountries(data); 
+    setCountries(data);
   } catch (err) {
     console.error(err);
   }
 };
-
 
 export const getStatesByCountry = async (
   countryCode,
@@ -58,6 +56,8 @@ export const getCitiesByState = async (
   setCities,
   setFormData,
 ) => {
+  console.log("fel''''''''''''''''''");
+  
   try {
     const res = await fetch(
       `${BASE_URL}/countries/${countryCode}/states/${stateCode}/cities`,

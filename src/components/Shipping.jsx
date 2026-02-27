@@ -1,30 +1,30 @@
 import React from "react";
 import FormField from "./FormField";
 
-export default function Shipping({ formData, handleChange, shippingCountries, shippingStates, shippingCities }) {
+export default function Shipping({ formData, handleChange, shippingCountries, shippingStates, shippingCities, errors }) {
     return (
         <div className="shipping-container">
-            {/* <h2>Shipping Details</h2> */}
-
             <FormField
                 label="First Name"
                 name="shippingFirstName"
                 value={formData.shippingFirstName}
                 onChange={handleChange}
                 required
+                error={errors.shippingFirstName}
             />
-
             <FormField
                 label="Last Name"
                 name="shippingLastName"
                 value={formData.shippingLastName}
                 onChange={handleChange}
                 required
+                error={errors.shippingLastName}
             />
-
             {/* Address Type */}
             <div className="flede">
-                <label>Address Type</label>
+                <label>Address Type
+                    <span className="required">*</span>
+                </label>
                 <div className="rad">
                     <div>
                         <input
@@ -38,7 +38,6 @@ export default function Shipping({ formData, handleChange, shippingCountries, sh
                         <label htmlFor="shippingHome">Residential</label>
                     </div>
                     <div>
-
                         <input
                             type="radio"
                             id="shippingWork"
@@ -51,23 +50,23 @@ export default function Shipping({ formData, handleChange, shippingCountries, sh
                     </div>
                 </div>
             </div>
-
             {formData.shippingAddressType === "Commercial" && (
                 <FormField
                     label="Company Name"
                     name="shippingCompanyName"
                     value={formData.shippingCompanyName}
                     onChange={handleChange}
+                    error={errors.shippingCompanyName}
                     required
                 />
             )}
-
             <FormField
                 label="Shipping Address Line 1"
                 name="shippingHouse"
                 value={formData.shippingHouse}
                 onChange={handleChange}
                 placeholder="House number and street name"
+                error={errors.shippingHouse}
                 required
             />
 
@@ -76,9 +75,9 @@ export default function Shipping({ formData, handleChange, shippingCountries, sh
                 value={formData.shippingAppartment}
                 onChange={handleChange}
                 placeholder="Apartment, suite, unit, etc."
+                error={errors.shippingAppartment}
             />
 
-            {/* <div className="select-grid"> */}
             <div className="flede">
                 <label htmlFor="shippingCountry">Country
                     <span className="required">*</span>
@@ -90,7 +89,6 @@ export default function Shipping({ formData, handleChange, shippingCountries, sh
                     onChange={handleChange}
                     required
                 >
-
                     <option value="">Select Country</option>
                     {shippingCountries.map((country) => (
                         <option key={country.iso2} value={country.iso2}>
@@ -98,6 +96,7 @@ export default function Shipping({ formData, handleChange, shippingCountries, sh
                         </option>
                     ))}
                 </select>
+                {errors.shippingCountry && <div className="error">{errors.shippingCountry}</div>}
             </div>
 
             <div className="flede">
@@ -112,15 +111,15 @@ export default function Shipping({ formData, handleChange, shippingCountries, sh
                     onChange={handleChange}
                     required
                 >
-
                     <option value="">Select State</option>
                     {shippingStates.map((state) => (
                         <option key={state.iso2} value={state.iso2}>
                             {state.name}
                         </option>
                     ))}
-                    <option value="Texas">Texas</option>
+
                 </select>
+                {errors.shippingState && <div className="error">{errors.shippingState}</div>}
             </div>
 
             <div className="flede">
@@ -142,28 +141,26 @@ export default function Shipping({ formData, handleChange, shippingCountries, sh
                         </option>
                     ))}
                 </select>
+                {errors.shippingCity && <div className="error">{errors.shippingCity}</div>}
             </div>
 
-            <div className="flede">
-                <label htmlFor="shippingPostalCode">Zip Code
-                    <span className="required">*</span>
-                </label>
-                <input
-                    type="text"
-                    name="shippingPostalCode"
-                    id="shippingPostalCode"
-                    value={formData.shippingPostalCode}
-                    onChange={handleChange}
-                    required
-                />
-            </div>
-            {/* </div> */}
+            <FormField
+                label="Zip Code"
+                name="shippingPostalCode"
+                value={formData.shippingPostalCode}
+                onChange={handleChange}
+                placeholder="Enter your postal code"
+                error={errors.shippingPostalCode}
+                required
+            />
 
             <FormField
                 label="Phone"
                 name="shippingPhone"
                 value={formData.shippingPhone}
                 onChange={handleChange}
+                placeholder="Enter your phone number"
+                error={errors.shippingPhone}
                 required
             />
         </div>

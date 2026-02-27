@@ -1,7 +1,7 @@
 import React from "react";
 import FormField from "./FormField";
 
-export default function Additional({ formData, handleChange,  }) {
+export default function Additional({ formData, handleChange, errors }) {
     return (
         <div className="additional-container">
             <h2>Additional Information</h2>
@@ -13,6 +13,7 @@ export default function Additional({ formData, handleChange,  }) {
                 value={formData.billingEmail}
                 onChange={handleChange}
                 placeholder="Enter your billing email address"
+                error={errors.billingEmail}
                 required
             />
 
@@ -23,6 +24,7 @@ export default function Additional({ formData, handleChange,  }) {
                 value={formData.confirmEmail}
                 onChange={handleChange}
                 placeholder="Confirm your billing email address"
+                error={errors.confirmEmail}
                 required
             />
 
@@ -32,40 +34,24 @@ export default function Additional({ formData, handleChange,  }) {
                 that your exemption certificate has been uploaded.
             </p>
 
-            {/* <FormField
-                label="In order to complete your order, someone will need to be onsite to receive the delivery. Please list any upcoming dates that we should avoid (i.e. school closures, holidays, summer vacation, etc.)*"
-                name="avoidDates"
-                type="textarea"
-                value={formData.avoidDates}
-                onChange={handleChange}
-                placeholder="List any dates we should avoid"
-                required
-            /> */}
             <div className="flede">
-
                 <label htmlFor="avoidDates">
                     In order to complete your order, someone will need to be onsite to receive the delivery. Please list any upcoming dates that we should avoid (i.e. school closures, holidays, summer vacation, etc.)
                     <span className="required">*</span>
                 </label>
                 <textarea name="avoidDates" id="avoidDates" value={formData.avoidDates || ""} onChange={handleChange} placeholder="Enter your vacation days here"></textarea>
+                {errors.avoidDates && <div className="error">{errors.avoidDates}</div>}
             </div>
-            {/* 
-            <FormField
-                label="Order Notes"
-                name="orderNotes"
-                type="text"
-                value={formData.orderNotes}
-                onChange={handleChange}
-                placeholder="Let us know how you found out about us!"
-            /> */}
-
+        
             <div className="flede">
 
                 <label htmlFor="orderNotes">
                     Order Notes
-                    <span className="required">*</span>
+                    {/* <span className="required">*</span> */}
                 </label>
-                <textarea name="orderNotes" id="orderNotes" value={formData.orderNotes || ""} onChange={handleChange}></textarea>
+
+                <textarea  name="orderNotes" id="orderNotes" value={formData.orderNotes || ""} onChange={handleChange}></textarea>
+                {errors.orderNotes && <div className="error">{errors.orderNotes}</div>}
             </div>
 
             <FormField
@@ -75,6 +61,8 @@ export default function Additional({ formData, handleChange,  }) {
                 value={formData.accountsPayableEmail}
                 onChange={handleChange}
                 placeholder="(who should we send the invoice to?)"
+                error={errors.accountsPayableEmail}
+
                 required
             />
 
@@ -85,9 +73,31 @@ export default function Additional({ formData, handleChange,  }) {
                 value={formData.digitalLicenseEmail}
                 onChange={handleChange}
                 placeholder="Enter digital license admin email"
+                error={errors.digitalLicenseEmail}
                 required
             />
 
+            <div className=" checkbox-field">
+                <input
+                    type="checkbox"
+                    id="districtConfirm"
+                    name="districtConfirm"
+                    checked={formData.districtConfirm}
+                    onChange={(e) =>
+                        handleChange({
+                            target: {
+                                name: "districtConfirm",
+                                value: e.target.checked,
+                            },
+                        })
+                    }
+                // required
+                />
+                <label htmlFor="districtConfirm">
+                    I confirm this purchase is a District purchase for 7Edu Global Academy. If this information is not correct, please click here to update it.
+               <span className="required">*</span>
+                </label>
+            </div>
             <div className=" checkbox-field">
                 <input
                     type="checkbox"
@@ -105,27 +115,6 @@ export default function Additional({ formData, handleChange,  }) {
                 />
                 <label htmlFor="marketingConsent">
                     I agree to receive occasional emails and can unsubscribe at any time.
-                </label>
-            </div>
-
-            <div className=" checkbox-field">
-                <input
-                    type="checkbox"
-                    id="districtConfirm"
-                    name="districtConfirm"
-                    checked={formData.districtConfirm}
-                    onChange={(e) =>
-                        handleChange({
-                            target: {
-                                name: "districtConfirm",
-                                value: e.target.checked,
-                            },
-                        })
-                    }
-                    required
-                />
-                <label htmlFor="districtConfirm">
-                    I confirm this purchase is a District purchase for 7Edu Global Academy. If this information is not correct, please click here to update it.*
                 </label>
             </div>
         </div>
